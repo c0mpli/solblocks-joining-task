@@ -9,6 +9,14 @@
   color: #ecf5fc;
 }
 
+.HeaderContent {
+  width: auto;
+  display: flex;
+  margin-top: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 767px) {
   .ProfileHeader > .profile {
     display: none !important;

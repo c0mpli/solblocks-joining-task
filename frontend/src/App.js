@@ -7,6 +7,7 @@ import Settings from "./pages/Settings";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useEffect, useState } from "react";
 import { ThemeContext } from "./context/ThemeContext";
+import Signup from "./pages/Signup";
 
 function App() {
   const [theme, setTheme] = useState(JSON.parse(localStorage.getItem("theme")));
@@ -19,10 +20,21 @@ function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className="App">
+      <div className="App" id={theme}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={user ? <Dashboard /> : <Login />} />
+            <Route
+              path="/addressdetails"
+              element={user ? <Addresses /> : <Login />}
+            />
+            <Route path="/settings" element={user ? <Settings /> : <Login />} />
+            <Route
+              path="/dashboard"
+              element={user ? <Dashboard /> : <Login />}
+            />
+            <Route path="/signup" element={user ? <Dashboard /> : <Signup />} />
+            <Route path="/login" element={user ? <Dashboard /> : <Login />} />
           </Routes>
         </BrowserRouter>
       </div>

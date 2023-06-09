@@ -9,7 +9,10 @@ const axios = require("axios");
 router.post("/register", async (req, res) => {
   const password = req.body.password;
   const email = req.body.email;
-
+  const settings = {
+    balance: true,
+    transactions: true,
+  };
   if (!password || !email)
     return res.status(400).send("One or more of the fields are missing.");
 
@@ -25,6 +28,7 @@ router.post("/register", async (req, res) => {
     const newUser = new User({
       password: hash,
       email,
+      settings,
     });
     return res.json(await newUser.save());
   });
@@ -66,24 +70,31 @@ router.get("/addresses", isUser, async (req, res) => {
 
 router.post("/get-address-details", isUser, async (req, res) => {
   const user = await User.findById(req.body.user);
+  const balance = user.settings.balance;
+  const transactions = user.settings.transactions;
   const addresses = user.addresses;
   let address = [];
   for (let i = 0; i < addresses.length; i++) {
     //call api to get address details
-    const balance = await axios.get(
-      `https://api.etherscan.io/api?module=account&action=balance&address=${addresses[i].address}&tag=latest&apikey=${process.env.ETHERSCAN_API_KEY}}`
-    );
-    const transactions = await axios.get(
-      `https://api.etherscan.io/api?module=account&action=txlist&address=${addresses[i].address}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=${process.env.ETHERSCAN_API_KEY}`
-    );
+    let b, t;
+    if (balance) {
+      b = await axios.get(
+        `https://api.etherscan.io/api?module=account&action=balance&address=${addresses[i].address}&tag=latest&apikey=${process.env.ETHERSCAN_API_KEY}}`
+      );
+    }
+    if (transactions) {
+      t = await axios.get(
+        `https://api.etherscan.io/api?module=account&action=txlist&address=${addresses[i].address}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=${process.env.ETHERSCAN_API_KEY}`
+      );
+    }
 
     address.push({
       address: addresses[i],
-      balance: balance.data.result,
-      transactions: transactions.data.result,
+      balance: b?.data.result || null,
+      transactions: t?.data.result || null,
     });
   }
-  res.json(address);
+  res.json({ address, balance, transactions });
 });
 
 router.post("/add-address", isUser, async (req, res) => {
@@ -104,7 +115,16 @@ router.post("/delete-address", isUser, async (req, res) => {
   res.json(await user.save());
 });
 
-router.get("/settings", isUser, async (req, res) => {
+router.post("/update-settings", isUser, async (req, res) => {
+  const user = await User.findById(req.body.user);
+  user.settings = {
+    balance: req.body.balance,
+    transactions: req.body.transactions,
+  };
+  res.json(await user.save());
+});
+
+router.get("/get-settings", isUser, async (req, res) => {
   const user = await User.findById(req.query.user);
   res.json(user.settings);
 });

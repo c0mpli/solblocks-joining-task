@@ -1,0 +1,105 @@
+.Programs {
+  width: 60vw;
+}
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+.slick-list {
+  margin: 0 -10px;
+}
+.slick-slider button::before,
+.slick-slider button::after {
+  color: var(--HMPBlue);
+  opacity: 100;
+}
+
+#dark .slick-slider button::before,
+.slick-slider button::after {
+  color: #ffb800;
+  opacity: 100;
+}
+.programsRectLine {
+  width: 95%;
+  height: 1px;
+  background-color: #013765;
+  margin: 0.5rem auto;
+}
+
+#dark .programsRectLine {
+  background-color: #4aa9fa;
+}
+
+.card {
+  color: black;
+  border: 1px solid #000010;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+#dark .card {
+}
+
+.card-top h1 {
+  font-size: 0.9rem;
+}
+.card-top p {
+  color: var(--HMPBlue);
+}
+
+.card-top p,
+.card-top h1,
+.card-bottom p {
+  margin: 0 !important;
+}
+.card-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+  flex-direction: row;
+  gap: 1rem;
+}
+.card-bottom button,
+.standard-button {
+  background: white;
+  border: 1px solid var(--HMPBlue);
+  border-radius: 20px;
+  cursor: pointer;
+  height: 2rem;
+  width: 6rem;
+  color: var(--HMPBlue);
+  font-weight: 700;
+}
+
+#dark .card {
+  color: #ecf5fc;
+  border: 1px solid #013765 !important;
+}
+#dark .card-bottom button {
+  background: #000010;
+  filter: drop-shadow(0px 2px 4px #013765);
+}
+
+@media screen and (max-width: 1200px) {
+  .Programs {
+    width: 50vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Programs {
+    width: 85vw;
+    margin-bottom: 2rem;
+  }
+  .card-bottom {
+    flex-direction: column;
+  }
+}

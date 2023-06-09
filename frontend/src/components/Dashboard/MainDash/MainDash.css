@@ -1,0 +1,123 @@
+.MainDash {
+  /* padding-top: 1rem; */
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+}
+.maindash-heading-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  margin-right: 2rem;
+}
+#light .MainDash h1,
+#light .MainDash h2 {
+  color: var(--DarkBG);
+}
+#dark .MainDash h1,
+#dark .MainDash h2 {
+  color: #ecf5fc;
+}
+
+#light .MainDash {
+  background-color: white;
+}
+#dark .MainDash {
+  background-color: var(--DarkBG);
+}
+
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(45, 39, 39, 0.1);
+  backdrop-filter: blur(10px);
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.modalContainer {
+  width: 500px;
+  height: auto;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  position: absolute;
+  z-index: 2;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.modalContainer .title {
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modalContainer .body {
+  flex: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.modalContainer .footer {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer .footer button {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: green;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background-color: crimson;
+}
+
+@media screen and (max-width: 1200px) {
+  .MainDash {
+    justify-content: flex-start;
+    padding-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .maindash-heading-wrapper {
+    width: 100%;
+    margin-left: 2rem;
+    margin-top: 2.5rem;
+  }
+  .MainDash {
+    align-items: center;
+  }
+}

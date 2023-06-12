@@ -56,6 +56,11 @@ body {
   background-color: #000010;
 }
 
+button:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease;
+}
+
 @media screen and (max-width: 1200px) {
   .AppGlass {
     grid-template-columns: 10% 50% auto;

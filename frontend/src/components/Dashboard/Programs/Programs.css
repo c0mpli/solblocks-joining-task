@@ -83,7 +83,8 @@
   color: #ecf5fc;
   border: 1px solid #013765 !important;
 }
-#dark .card-bottom button {
+#dark .card-bottom button,
+#dark .standard-button {
   background: #000010;
   filter: drop-shadow(0px 2px 4px #013765);
 }

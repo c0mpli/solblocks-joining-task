@@ -68,7 +68,7 @@ router.get("/addresses", isUser, async (req, res) => {
   res.json(user.addresses);
 });
 
-router.post("/get-address-details", isUser, async (req, res) => {
+router.post("/fetch-address-details", isUser, async (req, res) => {
   const user = await User.findById(req.body.user);
   const balance = user.settings.balance;
   const transactions = user.settings.transactions;
@@ -94,7 +94,12 @@ router.post("/get-address-details", isUser, async (req, res) => {
       transactions: t?.data.result || null,
     });
   }
-  res.json({ address, balance, transactions });
+  res.json(await user.updateOne({ data: address }));
+});
+
+router.get("/get-address-details", isUser, async (req, res) => {
+  const user = await User.findById(req.query.user);
+  res.json({ data: user.data, settings: user.settings });
 });
 
 router.post("/add-address", isUser, async (req, res) => {

@@ -3,7 +3,7 @@ import ProfileHeader from "../components/ProfileHeader";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import "./styles/Settings.css";
 function Settings() {
   const { user } = useAuthContext();
   const [settings, setSettings] = React.useState({
@@ -66,27 +66,26 @@ function Settings() {
         <ProfileHeader title={"Settings"} />
         <div className="AppGlass3">
           <div className="SettingsWrapper">
+            <h2>Data storage settings</h2>
             {settingsData.map((item, index) => {
               return (
-                <div key={index}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name={item.name}
-                      checked={settings[item.name]}
-                      onChange={(e) =>
-                        setSettings({
-                          ...settings,
-                          [e.target.name]: e.target.checked,
-                        })
-                      }
-                    />
-                    {item.title}
-                  </label>
+                <div key={index} className="settingsInputWrapper">
+                  <input
+                    type="checkbox"
+                    name={item.name}
+                    checked={settings[item.name]}
+                    onChange={(e) =>
+                      setSettings({
+                        ...settings,
+                        [e.target.name]: e.target.checked,
+                      })
+                    }
+                  />
+                  <label>{item.title}</label>
                 </div>
               );
             })}
-            <button className="Button" onClick={handleSave}>
+            <button className="standard-button" onClick={handleSave}>
               Save
             </button>
           </div>

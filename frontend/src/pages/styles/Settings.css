@@ -1,0 +1,20 @@
+.SettingsWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  gap: 0.5rem;
+  margin: 1rem 3rem;
+}
+#dark .settingsInputWrapper {
+  color: white;
+}
+.settingsInputWrapper {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+}
+.SettingsWrapper > button {
+  margin-top: 1rem;
+}
+#dark h2 {
+  color: white;
+}

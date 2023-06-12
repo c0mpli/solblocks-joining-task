@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
     type: Object,
     required: false,
   },
+  data: {
+    type: Array,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);

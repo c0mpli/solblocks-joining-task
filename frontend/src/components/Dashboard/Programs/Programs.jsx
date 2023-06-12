@@ -8,10 +8,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import Loader from "../../Loader";
+import usefetchAddressDetails from "../../../hooks/useFetchAddressDetails";
 function Programs() {
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const [programs, setPrograms] = useState();
+  const { fetchAddressDetails } = usefetchAddressDetails();
 
   function getAddresses() {
     axios
@@ -37,6 +39,7 @@ function Programs() {
         { headers: { token: user?.token } }
       )
       .then((response) => {
+        fetchAddressDetails(user?.id, user?.token);
         alert("Delted Successfully");
         getAddresses();
       });

@@ -5,11 +5,13 @@ import ProfileHeader from "../components/ProfileHeader";
 import "./styles/Dashboard.css";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
+import usefetchAddressDetails from "../hooks/useFetchAddressDetails";
 function Dashboard() {
   const [modal, setModal] = React.useState(false);
   const [addName, setAddName] = React.useState("");
   const [address, setAddress] = React.useState("");
   const { user } = useAuthContext();
+  const { fetchAddressDetails } = usefetchAddressDetails();
   const handleSubmit = () => {
     axios
       .post(
@@ -19,12 +21,14 @@ function Dashboard() {
             name: addName,
             address: address,
           },
-          user: user.id,
+          user: user?.id,
         },
-        { headers: { token: user.token } }
+        { headers: { token: user?.token } }
       )
       .then((response) => {
+        fetchAddressDetails(user?.id, user?.token);
         alert("Added Successfully");
+        window.location.reload();
       });
     console.log(addName, address);
     setModal(false);

@@ -68,12 +68,13 @@ router.get("/addresses", isUser, async (req, res) => {
   res.json(user.addresses);
 });
 
-router.post("/fetch-address-details", isUser, async (req, res) => {
-  const user = await User.findById(req.body.user);
+async function fetchAddressDetails(userId) {
+  const user = await User.findById(userId);
   const balance = user.settings.balance;
   const transactions = user.settings.transactions;
   const addresses = user.addresses;
   let address = [];
+  console.log(addresses.length);
   for (let i = 0; i < addresses.length; i++) {
     //call api to get address details
     let b, t;
@@ -94,7 +95,12 @@ router.post("/fetch-address-details", isUser, async (req, res) => {
       transactions: t?.data.result || null,
     });
   }
-  res.json(await user.updateOne({ data: address }));
+  console.log("Data fetched");
+  await user.updateOne({ data: address });
+}
+
+router.post("/fetch-address-details", isUser, async (req, res) => {
+  res.json(await fetchAddressDetails(req.body.user));
 });
 
 router.get("/get-address-details", isUser, async (req, res) => {
@@ -105,7 +111,9 @@ router.get("/get-address-details", isUser, async (req, res) => {
 router.post("/add-address", isUser, async (req, res) => {
   const user = await User.findById(req.body.user);
   user.addresses.push(req.body.address);
-  res.json(await user.save());
+  const t = await user.save();
+  //await fetchAddressDetails(req.body.user);
+  res.json(t);
 });
 
 router.post("/update-address", isUser, async (req, res) => {
@@ -117,7 +125,9 @@ router.post("/update-address", isUser, async (req, res) => {
 router.post("/delete-address", isUser, async (req, res) => {
   const user = await User.findById(req.body.user);
   user.addresses.splice(req.body.index, 1);
-  res.json(await user.save());
+  const t = await user.save();
+  //await fetchAddressDetails(req.body.user);
+  res.json(t);
 });
 
 router.post("/update-settings", isUser, async (req, res) => {

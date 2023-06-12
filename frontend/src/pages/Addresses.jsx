@@ -10,6 +10,7 @@ function Addresses() {
   const [userAddressData, setUserAddressData] = React.useState(null);
   const [addressIndex, setAddressIndex] = React.useState(0);
   const [address, setAddress] = React.useState(null);
+
   const getAddressDetails = () => {
     axios
       .get(
@@ -22,23 +23,6 @@ function Addresses() {
         console.log(response.data);
         setUserAddressData(response.data);
         setAddress(response.data.data[addressIndex]);
-      });
-  };
-
-  const fetchAddressDetails = () => {
-    axios
-      .post(
-        `${process.env.REACT_APP_BACKEND_URL}/user/fetch-address-details`,
-        {
-          user: user?.id,
-        },
-        {
-          headers: { token: user?.token },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-        setUserAddressData(response.data);
       });
   };
 

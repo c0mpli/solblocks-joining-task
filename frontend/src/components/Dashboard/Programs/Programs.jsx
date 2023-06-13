@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import deleteIcon from "../../../imgs/delete.png";
-
 import "./Programs.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

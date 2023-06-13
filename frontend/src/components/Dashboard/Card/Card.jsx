@@ -1,11 +1,8 @@
 import React from "react";
 import "./Card.css";
-import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
-//import { UilTimes } from "@iconscout/react-unicons";
-import { useNavigate, Link } from "react-router-dom";
-// parent Card
+import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
   return (

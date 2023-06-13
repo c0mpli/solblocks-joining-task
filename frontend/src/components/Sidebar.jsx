@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   const [expanded, setExpaned] = useState(false);
   const navigate = useNavigate();
-  const { dispatch, user } = useAuthContext();
+  const { dispatch } = useAuthContext();
 
   const sidebarVariants = {
     true: {

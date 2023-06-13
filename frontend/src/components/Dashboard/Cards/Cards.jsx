@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Cards.css";
-import { useNavigate } from "react-router-dom";
 import Card from "../Card/Card";
 import axios from "axios";
 
 const Cards = () => {
   const [totalSupplyEth, setTotalSupplyEth] = useState("loading...");
   const [ethPrice, setEthPrice] = useState("loading...");
-
-  const navigate = useNavigate();
 
   function getTotalSupplyEth() {
     axios

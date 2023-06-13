@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Addresses from "./pages/Addresses";
 import Settings from "./pages/Settings";
 import { useAuthContext } from "./hooks/useAuthContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ThemeContext } from "./context/ThemeContext";
 import Signup from "./pages/Signup";
 

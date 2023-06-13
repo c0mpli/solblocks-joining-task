@@ -3,10 +3,10 @@ import Sidebar from "../components/Sidebar";
 import ProfileHeader from "../components/ProfileHeader";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
-import Web3 from "web3";
 import "./styles/Addresses.css";
 import Loader from "../components/Loader";
 import { useLocation } from "react-router-dom";
+import useWeiToEth from "../hooks/useWeiToEth";
 function Addresses() {
   const { user } = useAuthContext();
   const [userAddressData, setUserAddressData] = React.useState(null);
@@ -15,6 +15,7 @@ function Addresses() {
     state ? state.address : 0
   );
   const [address, setAddress] = React.useState(null);
+  const { WeiToEth } = useWeiToEth();
 
   const getAddressDetails = () => {
     axios
@@ -67,10 +68,7 @@ function Addresses() {
                       Balance:{" "}
                       <span className="addressBalance">
                         {userAddressData.settings.balance
-                          ? ` ${Web3.utils.fromWei(
-                              address.balance,
-                              "ether"
-                            )} Eth`
+                          ? ` ${WeiToEth(address.balance)} Eth`
                           : "Turned off"}
                       </span>
                     </h3>
@@ -101,16 +99,11 @@ function Addresses() {
                                   <td>{transaction.from}</td>
                                   <td>{transaction.to}</td>
                                   <td>{` ${parseFloat(
-                                    Web3.utils.fromWei(
-                                      transaction.value,
-                                      "ether"
-                                    )
+                                    WeiToEth(transaction.value)
                                   ).toFixed(3)} Eth`}</td>
                                   <td>{` ${parseFloat(
-                                    Web3.utils.fromWei(
-                                      transaction.gasPrice *
-                                        transaction.gasUsed,
-                                      "ether"
+                                    WeiToEth(
+                                      transaction.gasPrice * transaction.gasUsed
                                     )
                                   ).toFixed(8)} Eth`}</td>
                                 </tr>

@@ -42,7 +42,7 @@
 }
 
 .modalContainer {
-  width: 500px;
+  width: 30%;
   height: auto;
   border-radius: 12px;
   background-color: white;
@@ -53,11 +53,18 @@
   flex-direction: column;
   padding: 25px;
 }
-
 .modalContainer .title {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  margin-top: 10px;
+  width: 50%;
+  margin: 0 auto;
+  gap: 0.5rem;
+}
+.modalContainer .title > input {
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: 1px solid black;
 }
 
 .titleCloseBtn {
@@ -93,7 +100,7 @@
   height: 45px;
   margin: 10px;
   border: none;
-  background-color: green;
+  background-color: var(--HMPBlue);
   color: white;
   border-radius: 8px;
   font-size: 20px;
@@ -119,5 +126,8 @@
   }
   .MainDash {
     align-items: center;
+  }
+  .modalContainer {
+    width: 80%;
   }
 }

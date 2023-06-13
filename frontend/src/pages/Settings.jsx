@@ -4,12 +4,10 @@ import Sidebar from "../components/Sidebar";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import "./styles/Settings.css";
+import Loader from "../components/Loader";
 function Settings() {
   const { user } = useAuthContext();
-  const [settings, setSettings] = React.useState({
-    balance: true,
-    transactions: true,
-  });
+  const [settings, setSettings] = React.useState(null);
   const settingsData = [
     {
       title: "View Balance",
@@ -67,24 +65,26 @@ function Settings() {
         <div className="AppGlass3">
           <div className="SettingsWrapper">
             <h2>Data storage settings</h2>
-            {settingsData.map((item, index) => {
-              return (
-                <div key={index} className="settingsInputWrapper">
-                  <input
-                    type="checkbox"
-                    name={item.name}
-                    checked={settings[item.name]}
-                    onChange={(e) =>
-                      setSettings({
-                        ...settings,
-                        [e.target.name]: e.target.checked,
-                      })
-                    }
-                  />
-                  <label>{item.title}</label>
-                </div>
-              );
-            })}
+            {settings &&
+              settingsData.map((item, index) => {
+                return (
+                  <div key={index} className="settingsInputWrapper">
+                    <input
+                      type="checkbox"
+                      name={item.name}
+                      checked={settings[item.name]}
+                      onChange={(e) =>
+                        setSettings({
+                          ...settings,
+                          [e.target.name]: e.target.checked,
+                        })
+                      }
+                    />
+                    <label>{item.title}</label>
+                  </div>
+                );
+              })}
+            {!settings && <Loader />}
             <button className="standard-button" onClick={handleSave}>
               Save
             </button>

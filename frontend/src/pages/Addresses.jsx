@@ -5,10 +5,15 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 import Web3 from "web3";
 import "./styles/Addresses.css";
+import Loader from "../components/Loader";
+import { useLocation } from "react-router-dom";
 function Addresses() {
   const { user } = useAuthContext();
   const [userAddressData, setUserAddressData] = React.useState(null);
-  const [addressIndex, setAddressIndex] = React.useState(0);
+  const { state } = useLocation();
+  const [addressIndex, setAddressIndex] = React.useState(
+    state ? state.address : 0
+  );
   const [address, setAddress] = React.useState(null);
 
   const getAddressDetails = () => {
@@ -33,7 +38,6 @@ function Addresses() {
 
   React.useEffect(() => {
     getAddressDetails();
-    //fetchAddressDetails();
   }, []);
   return (
     <div className="AppGlass2">
@@ -60,10 +64,15 @@ function Addresses() {
                   </div>
                   <div>
                     <h3>
-                      Account Balance:{" "}
-                      {userAddressData.settings.balance
-                        ? ` ${Web3.utils.fromWei(address.balance, "ether")} Eth`
-                        : "Turned off"}
+                      Balance:{" "}
+                      <span className="addressBalance">
+                        {userAddressData.settings.balance
+                          ? ` ${Web3.utils.fromWei(
+                              address.balance,
+                              "ether"
+                            )} Eth`
+                          : "Turned off"}
+                      </span>
                     </h3>
                   </div>
                 </section>
@@ -119,6 +128,10 @@ function Addresses() {
                 </div>
               </>
             )}
+            {address && address.length == 0 && (
+              <h3>No Address Found. Add some to view details</h3>
+            )}
+            {!address && <Loader />}
           </div>
         </div>
       </div>

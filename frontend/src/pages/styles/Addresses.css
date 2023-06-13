@@ -1,18 +1,30 @@
 .transactions-container {
   overflow-x: auto !important;
   padding: 1rem;
+  width: 100%;
 }
 .AddressTopBarWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 93%;
+  flex-direction: row;
+  margin-left: 1rem;
+}
+#dark .AddressTopBarWrapper {
+  color: white;
 }
 .AccountNameWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+.transactions-wrapper > h3 {
+  margin-left: 1rem;
+}
+#dark .transactions-wrapper > h3 {
+  color: white;
 }
 table {
   max-width: 100%;
@@ -51,11 +63,42 @@ td {
   text-overflow: ellipsis;
 }
 
+select {
+  padding: 7px 20px 7px 12px;
+  width: 100%;
+  border: 1px solid var(--HMPBlue);
+  color: var(--HMPBlue);
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 150ms ease;
+}
+#dark select {
+  background: #000010;
+  filter: drop-shadow(0px 2px 4px #013765);
+  color: white;
+  border: 1px solid white;
+}
+.addressBalance {
+  color: var(--HMPBlue);
+}
+#dark .addressBalance {
+  color: white;
+}
+
 @media screen and (max-width: 768px) {
   table,
   td,
   th,
   .transactions-container {
     padding: 0.5rem;
+  }
+  .transactions-container {
+    width: 100vw;
+  }
+  .AddressTopBarWrapper {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

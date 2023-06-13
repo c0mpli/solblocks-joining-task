@@ -60,7 +60,11 @@ function Programs() {
               </div>
               <div className="card-bottom">
                 <p>{item.description}</p>
-                <button onClick={() => navigate("/addressdetails")}>
+                <button
+                  onClick={() =>
+                    navigate("/addressdetails", { state: { address: key } })
+                  }
+                >
                   View Details
                 </button>
                 <button

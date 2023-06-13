@@ -13,6 +13,10 @@ function Dashboard() {
   const { user } = useAuthContext();
   const { fetchAddressDetails } = usefetchAddressDetails();
   const handleSubmit = () => {
+    if (!addName || !address) {
+      alert("Please fill all the fields");
+      return;
+    }
     axios
       .post(
         `${process.env.REACT_APP_BACKEND_URL}/user/add-address`,

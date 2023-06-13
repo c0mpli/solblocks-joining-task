@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const isUser = require("../middlewares/isUser");
 const axios = require("axios");
+const cron = require("node-cron");
 
 router.post("/register", async (req, res) => {
   const password = req.body.password;
@@ -98,6 +99,14 @@ async function fetchAddressDetails(userId) {
   console.log("Data fetched");
   await user.updateOne({ data: address });
 }
+
+cron.schedule("0 */3 * * *", async () => {
+  const users = await User.find();
+  for (let i = 0; i < users.length; i++) {
+    await fetchAddressDetails(users[i]._id);
+  }
+  console.log("Data updated by cron");
+});
 
 router.post("/fetch-address-details", isUser, async (req, res) => {
   res.json(await fetchAddressDetails(req.body.user));

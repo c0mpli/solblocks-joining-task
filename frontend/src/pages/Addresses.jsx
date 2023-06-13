@@ -121,9 +121,6 @@ function Addresses() {
                 </div>
               </>
             )}
-            {address && address.length == 0 && (
-              <h3>No Address Found. Add some to view details</h3>
-            )}
             {!address && <Loader />}
           </div>
         </div>

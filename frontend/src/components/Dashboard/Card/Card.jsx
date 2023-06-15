@@ -23,9 +23,6 @@ function CompactCard({ param }) {
         boxShadow: "1px 4px 4px 2px rgba(0, 0, 0, 0.25)",
       }}
       layoutId="expandableCard"
-      onClick={() => {
-        navigate("../myprograms");
-      }}
     >
       <div className="radialBar">{param.value}</div>
       <span className="card-title">{param.title}</span>
